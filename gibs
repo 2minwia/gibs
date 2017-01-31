@@ -12,7 +12,8 @@ then
     echo "commit - add/remove all files, commit them"
     echo "init - create a git repository in specified directory, if directory does not exist create basic repo"
     echo "rinit - create a git repository in specified directory, if directory does not exist create basic repo, then set it up for github or something like that"
-    echo "push - litterally an alias to git push atm lol"
+    echo "push - push code to remote repo"
+    echo "pull - pull code from remote repo"
 fi
 
 if [ "$1" = "commit" ]
@@ -137,6 +138,22 @@ fi
 
 if [ "$1" = "push" ]
 then
-    git push #fuck me im lazy
-    #unsurprisingly this will have upgrades
+git status > /dev/null 2>&1
+    if [ != "$?" = 0 ]
+    then
+        echo "You're not in a git repository!"
+        exit 1
+    fi
+    git push
+fi
+
+if [ "$1" = "pull" ]
+then
+git status > /dev/null 2>&1
+    if [ != "$?" = 0 ]
+    then
+        echo "You're not in a git repository!"
+        exit 1
+    fi
+    git push
 fi
