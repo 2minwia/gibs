@@ -3,7 +3,7 @@
 #no warranty included, or anything like that
 #etc etc
 #license is just... do whatever
-gibsroot=$(git rev-parse --show-toplevel) > /dev/null 2>&1
+gibsroot=$(git rev-parse --show-toplevel > /dev/null 2>&1)
 
 if [ -z "$1" ] || [ "$1" = "help" ]
 then
