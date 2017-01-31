@@ -1,8 +1,13 @@
 #!/bin/bash
-gidiotroot=$(git rev-parse --show-toplevel) > /dev/null 2>&1
+#copyright (c) Jack Wiberg 2017 <768.jac@gmail.com>
+#no warranty included, or anything like that
+#etc etc
+#license is just... do whatever
+gibsroot=$(git rev-parse --show-toplevel) > /dev/null 2>&1
+
 if [ -z "$1" ] || [ "$1" = "help" ]
 then
-    echo "gidiot commands:"
+    echo "gibs commands:"
     echo "help - display this help"
     echo "commit - add/remove all files, commit them"
     echo "init - create a git repository in specified directory, if directory does not exist create basic repo"
@@ -16,23 +21,23 @@ then
         echo "You're not in a git repository!"
         exit 1
     fi
-    gidiotcur=$(pwd)
-    cd "$gidiotroot"
+    gibscur=$(pwd)
+    cd "$gibsroot"
     git add -A :/
     if [ -z "$2" ]
     then
         echo "Please enter short description of commit"    
-        read -r gidiotcom
-        if [ -z "$gidiotcom" ]
+        read -r gibscom
+        if [ -z "$gibscom" ]
         then
             echo "No description given, canceling"
             exit 1
         fi
     else
-        gidiotcom="$2"
+        gibscom="$2"
     fi
-    git commit -m "$gidiotcom"
-    cd "$gidiotcur"
+    git commit -m "$gibscom"
+    cd "$gibscur"
 fi
 
 if [ "$1" = "init" ]
@@ -46,24 +51,24 @@ then
     if [ -z "$2" ]
     then
         echo "Please enter repo name"    
-        read -r gidiotreponame
-        if [ -z "$gidiotreponame" ]
+        read -r gibsreponame
+        if [ -z "$gibsreponame" ]
         then
             echo "No name given, canceling"
             exit 1
         fi
     else
-        gidiotreponame="$2"
+        gibsreponame="$2"
     fi
-    if [ ! -d "$gidiotreponame" ]
+    if [ ! -d "$gibsreponame" ]
     then
-        mkdir "$gidiotreponame"
-        cd "$gidiotreponame"
+        mkdir "$gibsreponame"
+        cd "$gibsreponame"
         git init . > /dev/null 2>&1
-        echo "$gidiotreponame" > README.md
+        echo "$gibsreponame" > README.md
         git add README.md > /dev/null 2>&1
     else
-        cd "$gidiotreponame"
+        cd "$gibsreponame"
         git init . > /dev/null 2>&1
         git add -A
     fi
