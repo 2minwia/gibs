@@ -111,26 +111,32 @@ then
         git add -A
     fi
     git commit -m "Initial commit"
-    echo "Please enter repo git url"
-    read -r gibsgitorigin
-    if [ -z "$gibsgitorigin" ]
+    if [ -z "$3" ]
     then
-        echo "No url given, canceling"    
-        echo "(Your repo is still there, but you need to link it to github yourself)"
-        exit 1
+        echo "Please enter repo git url"
+        read -r gibsgitorigin
+        if [ -z "$gibsgitorigin" ]
+        then
+            echo "No url given, canceling"    
+            echo "(Your repo is still there, but you need to link it to github yourself)"
+            exit 1
+        fi
+    else
+        gibsgitorigin="$3"
     fi
     git remote add origin "$gibsgitorigin" > /dev/null 2>&1
+    git push -u origin master > /dev/null 2>&1
     if [ "$?" != 0 ]
     then
         echo "Something went wrong (Url repo wrong?)"
         echo "(Your repo is still there, but you need to link it to github yourself)"
         exit 1
     fi
-    git push -u origin master > /dev/null 2>&1
     cd ..
 fi
 
-fi [ "$1" = "push" ]
+if [ "$1" = "push" ]
 then
     git push #fuck me im lazy
+    #unsurprisingly this will have upgrades
 fi
