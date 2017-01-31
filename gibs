@@ -11,6 +11,7 @@ then
     echo "help - display this help"
     echo "commit - add/remove all files, commit them"
     echo "init - create a git repository in specified directory, if directory does not exist create basic repo"
+    echo "rinit - create a git repository in specified directory, if directory does not exist create basic repo, then set it up for github or something like that"
 fi
 
 if [ "$1" = "commit" ]
@@ -73,5 +74,57 @@ then
         git add -A
     fi
     git commit -m "Initial commit"
+    cd ..
+fi
+
+if [ "$1" = "rinit" ]
+then
+    git status > /dev/null 2>&1
+    if [ "$?" = 0 ]
+    then
+        echo "You're already in a git repository!"
+        exit 1
+    fi
+    if [ -z "$2" ]
+    then
+        echo "Please enter repo name"    
+        read -r gibsreponame
+        if [ -z "$gibsreponame" ]
+        then
+            echo "No name given, canceling"
+            exit 1
+        fi
+    else
+        gibsreponame="$2"
+    fi
+    if [ ! -d "$gibsreponame" ]
+    then
+        mkdir "$gibsreponame"
+        cd "$gibsreponame"
+        git init . > /dev/null 2>&1
+        echo "$gibsreponame" > README.md
+        git add README.md > /dev/null 2>&1
+    else
+        cd "$gibsreponame"
+        git init . > /dev/null 2>&1
+        git add -A
+    fi
+    git commit -m "Initial commit"
+    echo "Please enter repo git url"
+    read -r gibsgitorigin
+    if [ -z "$gibsgitorigin" ]
+    then
+        echo "No url given, canceling"    
+        echo "(Your repo is still there, but you need to link it to github yourself)"
+        exit 1
+    fi
+    git remote add origin "$gibsgitorigin" > /dev/null 2>&1
+    if [ "$?" != 0 ]
+    then
+        echo "Something went wrong (Url repo wrong?)"
+        echo "(Your repo is still there, but you need to link it to github yourself)"
+        exit 1
+    fi
+    git push -u origin master > /dev/null 2>&1
     cd ..
 fi
