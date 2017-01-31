@@ -9,9 +9,12 @@ if [ -z "$1" ] || [ "$1" = "help" ]
 then
     echo "gibs commands:"
     echo "help - display this help"
-    echo "commit - add/remove all files, commit them - takes optional argument commit comment, make sure its in double quotes if its more than one word"
-    echo "init - create a git repository in specified directory, if directory does not exist create basic repo - takes optional argument repo name"
-    echo "rinit - create a git repository in specified directory, if directory does not exist create basic repo, then set it up for github or something like that - takes optional arguments, repo name and repo url"
+    echo "commit - add/remove all files, commit them"
+    echo "takes optional argument commit comment, make sure its in double quotes if its more than one word"
+    echo "init - create a git repository in specified directory, if directory does not exist create basic repo"
+    echo "takes optional argument repo name"
+    echo "rinit - create a git repository in specified directory, if directory does not exist create basic repo, then set it up for github or something like that"
+    echo "takes optional arguments, repo name and repo url"
     echo "push - push code to remote repo"
     echo "pull - pull code from remote repo"
 fi
