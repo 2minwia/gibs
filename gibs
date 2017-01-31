@@ -12,6 +12,7 @@ then
     echo "commit - add/remove all files, commit them"
     echo "init - create a git repository in specified directory, if directory does not exist create basic repo"
     echo "rinit - create a git repository in specified directory, if directory does not exist create basic repo, then set it up for github or something like that"
+    echo "push - litterally an alias to git push atm lol"
 fi
 
 if [ "$1" = "commit" ]
@@ -127,4 +128,9 @@ then
     fi
     git push -u origin master > /dev/null 2>&1
     cd ..
+fi
+
+fi [ "$1" = "push" ]
+then
+    git push #fuck me im lazy
 fi
