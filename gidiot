@@ -1,0 +1,72 @@
+#!/bin/bash
+gidiotroot=$(git rev-parse --show-toplevel) > /dev/null 2>&1
+if [ -z "$1" ] || [ "$1" = "help" ]
+then
+    echo "gidiot commands:"
+    echo "help - display this help"
+    echo "commit - add/remove all files, commit them"
+    echo "init - create a git repository in specified directory, if directory does not exist create basic repo"
+fi
+
+if [ "$1" = "commit" ]
+then
+    git status > /dev/null 2>&1
+    if [ ! "$?" = 0 ]
+    then
+        echo "You're not in a git repository!"
+        exit 1
+    fi
+    gidiotcur=$(pwd)
+    cd "$gidiotroot"
+    git add -A :/
+    if [ -z "$2" ]
+    then
+        echo "Please enter short description of commit"    
+        read -r gidiotcom
+        if [ -z "$gidiotcom" ]
+        then
+            echo "No description given, canceling"
+            exit 1
+        fi
+    else
+        gidiotcom="$2"
+    fi
+    git commit -m "$gidiotcom"
+    cd "$gidiotcur"
+fi
+
+if [ "$1" = "init" ]
+then
+    git status > /dev/null 2>&1
+    if [ "$?" = 0 ]
+    then
+        echo "You're already in a git repository!"
+        exit 1
+    fi
+    if [ -z "$2" ]
+    then
+        echo "Please enter repo name"    
+        read -r gidiotreponame
+        if [ -z "$gidiotreponame" ]
+        then
+            echo "No name given, canceling"
+            exit 1
+        fi
+    else
+        gidiotreponame="$2"
+    fi
+    if [ ! -d "$gidiotreponame" ]
+    then
+        mkdir "$gidiotreponame"
+        cd "$gidiotreponame"
+        git init . > /dev/null 2>&1
+        echo "$gidiotreponame" > README.md
+        git add README.md > /dev/null 2>&1
+    else
+        cd "$gidiotreponame"
+        git init . > /dev/null 2>&1
+        git add -A
+    fi
+    git commit -m "Initial commit"
+    cd ..
+fi
