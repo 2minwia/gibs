@@ -6,6 +6,10 @@ AKA git for idiots
 
 Installation:
 
-1. sudo ./install.sh
+1. cat install.sh
 
-2. You're done!
+2. Make sure there is nothing bad going on
+
+3. sudo ./install.sh
+
+4. You're done
