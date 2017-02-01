@@ -6,6 +6,6 @@ AKA git for idiots
 
 Installation:
 
-1. Put gibs somewhere in your path.
+1. sudo ./install.sh
 
 2. You're done!
