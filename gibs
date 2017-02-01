@@ -14,6 +14,9 @@ then
     echo "takes optional argument commit comment, make sure its in double quotes if its more than one word"
     echo "init - create a git repository in specified directory, if directory does not exist create basic repo"
     echo "takes optional argument repo name"
+    echo "undo - undos changes not yet commited, does not remove files"
+    echo ""
+    echo "remote commands:"
     echo "rinit - create a git repository in specified directory, if directory does not exist create basic repo, then set it up for github or something like that"
     echo "takes optional arguments, repo name and repo url"
     echo "push - push code to remote repo"
@@ -161,3 +164,15 @@ git status > /dev/null 2>&1
     fi
     git pull
 fi
+
+if [ "$1" = "undo" ]
+then
+git status > /dev/null 2>&1
+    if [ "$?" != 0 ]
+    then
+        echo "You're not in a git repository!"
+        exit 1
+    fi
+    git checkout :/
+fi
+
