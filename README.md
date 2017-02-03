@@ -6,10 +6,6 @@ AKA git for idiots
 
 Installation:
 
-1. cat install.sh
+1. sudo mv gibs /bin/gibs
 
-2. Make sure there is nothing bad going on
-
-3. sudo ./install.sh
-
-4. You're done
+2. You're done
