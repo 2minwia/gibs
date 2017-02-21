@@ -1,9 +1,10 @@
 #!/bin/bash
-#copyright (c) Jack Wiberg 2017 <768.jac@gmail.com>
-#no warranty included, or anything like that
-#you cant hold me liable for anything
-#etc etc
-#license is just... do whatever
+#Copyright (c) Jack Wiberg 2017 <768.jac@gmail.com>
+#This program is free software. It comes without any warranty, to
+#the extent permitted by applicable law. You can redistribute it
+#and/or modify it under the terms of the Do What The Fuck You Want
+#To Public License, Version 2, as published by Sam Hocevar. See
+#http://www.wtfpl.net/ for more details.
 gibsroot=$(git rev-parse --show-toplevel > /dev/null 2>&1)
 
 if [ -z "$1" ] || [ "$1" = "help" ]
