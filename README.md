@@ -6,6 +6,6 @@ AKA git for idiots
 
 Installation:
 
-1. sudo mv gibs /bin/gibs
+1. sudo mv gibs /usr/bin/gibs
 
 2. You're done
