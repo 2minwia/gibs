@@ -1,7 +1,7 @@
 #!/bin/bash
 #copyright (c) Jack Wiberg 2017 <768.jac@gmail.com>
 #no warranty included, or anything like that
-#you cant hold me liable for your pc exploding or something else aswell
+#you cant hold me liable for anything
 #etc etc
 #license is just... do whatever
 gibsroot=$(git rev-parse --show-toplevel > /dev/null 2>&1)
